@@ -5,16 +5,23 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="keywords" content="orgMode" />
+        <meta name="author" content="SpeDAllen" />
+        <meta name="keywords" content="tests,testing" />
+        <meta name="description" content="This is only a test" />
 
 <!-- Open Graph tags -->
 <meta property="og:site_name" content=""My new blog""/>
-    <meta property="og:type" content="website"/>
-    <meta property="og:title" content=""My new blog""/>
-    <meta property="og:url" content=""/>
-    <meta property="og:description" content=""My new blog""/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="Testing the new function"/>
+    <meta property="og:url" content="/2024/testing-the-new-function.html"/>
+    <meta property="og:description" content="This is only a test"/>
+    <meta property="article:published_time" content="2024-05-11" />
+    <meta property="article:section" content="blog" />
+        <meta property="article:tag" content="tests" />
+        <meta property="article:tag" content="testing" />
+        <meta property="article:author" content="SpeDAllen" />
 
-    <title>orgMode - "My new blog"</title>
+    <title>Testing the new function - "My new blog"</title>
 
         <link rel="stylesheet" href="/theme/css/bootstrap.lumen.min.css" type="text/css"/>
 
@@ -72,7 +79,13 @@
                             Recent Articles
                         </a>
                     </li>
-                    <li class="panel anti-panel"><ul id="collapse-latest" class="sidebar_submenu collapse ">
+                    <li class="panel anti-panel"><ul id="collapse-latest" class="sidebar_submenu collapse in">
+                        <li class="active">
+                            <a class="hide-overflow" href="/2024/testing-the-new-function.html" title="Testing the new function">
+                                <i class="fa fa-file-text padding-small"></i>
+                                Testing the new function
+                            </a>
+                        </li>
                         <li class="">
                             <a class="hide-overflow" href="/2024/theming-the-blog.html" title="Theming the blog">
                                 <i class="fa fa-file-text padding-small"></i>
@@ -123,35 +136,56 @@
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
-<div class="row">
-    <div class="col-lg-9">
-        <header class="page-header">
-            <h1>Articles featuring orgMode</h1>
-        </header>
+<section id="content">
+    <article>
+        <div class="row">
+            <div class="col-lg-9">
+                <header class="page-header">
+                    <h1>
+                        <a href="/2024/testing-the-new-function.html"
+                           rel="bookmark"
+                           title="Permalink to Testing the new function">
+                            Testing the new function
+                        </a>
+                        <small>
+<div class="post-info">
+    <div class="publish-info-block">
+        <small>
+            <span class="published">
+                <i class="fa fa-calendar padding-small"></i><time datetime="2024-05-11T00:00:00+02:00"> za 11 mei 2024</time>
+            </span>
+            <span class="category">
+                <i class="fa fa-folder-open padding-small"></i><a href="/category/blog.html">blog</a>
+            </span>
+            <span class="tags">
+                <i class="fa fa-tags padding-small"></i>
+                <a href="/tag/tests.html">tests</a> /                 <a href="/tag/testing.html">testing</a>            </span>
+        </small>
     </div>
+</div><!-- /.post-info -->                        </small>
+                    </h1>
+                </header>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="entry-content">
+                    
+<div id="content" class="content">
+
+<div id="outline-container-org7d5a9b2" class="outline-2">
+<h2 id="org7d5a9b2">This is only a test</h2>
 </div>
-<div class="row">
-    <div class="col-lg-9">
-            <article>
-                <h4>
-                    <time datetime="2024-05-11T00:00:00+02:00"> za 11 mei 2024</time>
-                    <a href="/2024/theming-the-blog.html">Theming the blog</a>
-                </h4>
-            </article>
-            <article>
-                <h4>
-                    <time datetime="2024-05-05T00:00:00+02:00"> zo 05 mei 2024</time>
-                    <a href="/2024/create-a-useful-development-shell.html">Create a useful development shell</a>
-                </h4>
-            </article>
-            <article>
-                <h4>
-                    <time datetime="2024-04-27T14:59:00+02:00"> za 27 april 2024</time>
-                    <a href="/2024/pelican-blogging-with-org-mode.html">Pelican blogging with Org mode</a>
-                </h4>
-            </article>
-    </div>
 </div>
+
+                </div>
+                <footer class="text-right">
+                    <p>- SpeDAllen</p>
+                </footer>
+            </div>
+        </div>
+    </article>
+</section>
 <footer>
     <hr>
     <div class="row">
@@ -173,24 +207,6 @@
     <script src="/theme/js/bootstrap.min.js"></script>
     <!-- twitchy Script -->
     <script src="/theme/js/pelican_twitchy.min.js"></script>
-<script>
-    function FadeInOnScroll(ObjectList){
-        ObjectList.each(function(i) {
-            var bottom_of_object = $(this).position().top + $(this).outerHeight();
-            var bottom_of_window = $(window).scrollTop() + $(window).height();
 
-            if( bottom_of_window > bottom_of_object ){
-                $(this).fadeTo(750,1);
-            }
-        });
-    }
-
-    articles = $("article").fadeTo(0, 0.05);
-    FadeInOnScroll(articles)
-
-    $(window).scroll(function() {
-        FadeInOnScroll(articles)
-    });
-</script>
 </body>
 </html>

@@ -5,18 +5,25 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="author" content="public" />
-        <meta name="description" content="Pelican blogging with Org mode Setting up this blog GitHub pages GitHub will host your static web pages for you even on a free account making it rather ideal for a blog hosting platform. Pelican But before setting anything up in GitHub you should decide on your tooling. There are …" />
+        <meta name="author" content="SpeDAllen" />
+        <meta name="keywords" content="flakes,blog,pelican,devShell,orgMode,gitHub" />
+        <meta name="description" content="GitHub pages GitHub will host your static web pages for you even on a free account making it rather ideal for a blog hosting platform. Pelican But before setting anything up in GitHub you should decide on your tooling. There are several site generators freely available with Jenkyll probably being …" />
 
 <!-- Open Graph tags -->
 <meta property="og:site_name" content=""My new blog""/>
     <meta property="og:type" content="article"/>
     <meta property="og:title" content="Pelican blogging with Org mode"/>
     <meta property="og:url" content="/2024/pelican-blogging-with-org-mode.html"/>
-    <meta property="og:description" content="Pelican blogging with Org mode Setting up this blog GitHub pages GitHub will host your static web pages for you even on a free account making it rather ideal for a blog hosting platform. Pelican But before setting anything up in GitHub you should decide on your tooling. There are …"/>
-    <meta property="article:published_time" content="2024-05-09" />
+    <meta property="og:description" content="GitHub pages GitHub will host your static web pages for you even on a free account making it rather ideal for a blog hosting platform. Pelican But before setting anything up in GitHub you should decide on your tooling. There are several site generators freely available with Jenkyll probably being …"/>
+    <meta property="article:published_time" content="2024-04-27" />
     <meta property="article:section" content="blog" />
-        <meta property="article:author" content="public" />
+        <meta property="article:tag" content="flakes" />
+        <meta property="article:tag" content="blog" />
+        <meta property="article:tag" content="pelican" />
+        <meta property="article:tag" content="devShell" />
+        <meta property="article:tag" content="orgMode" />
+        <meta property="article:tag" content="gitHub" />
+        <meta property="article:author" content="SpeDAllen" />
 
     <title>Pelican blogging with Org mode - "My new blog"</title>
 
@@ -78,6 +85,12 @@
                     </li>
                     <li class="panel anti-panel"><ul id="collapse-latest" class="sidebar_submenu collapse in">
                         <li class="">
+                            <a class="hide-overflow" href="/2024/theming-the-blog.html" title="Theming the blog">
+                                <i class="fa fa-file-text padding-small"></i>
+                                Theming the blog
+                            </a>
+                        </li>
+                        <li class="">
                             <a class="hide-overflow" href="/2024/create-a-useful-development-shell.html" title="Create a useful development shell">
                                 <i class="fa fa-file-text padding-small"></i>
                                 Create a useful development shell
@@ -107,22 +120,6 @@
                 <li class="panel anti-panel"><ul id="collapse-pages" class="sidebar_submenu collapse ">
                 </ul></li>
                 
-                <li class="nav-divider"></li>
-                <li>
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse-categories">
-                        <i class="fa fa-folder-open padding-small"></i>
-                        Categories
-                    </a>
-                </li>
-                <li class="panel anti-panel"><ul id="collapse-categories" class="sidebar_submenu collapse ">
-                    <li class="active">
-                        <a href="/category/blog.html">
-                            <i class="fa fa-folder-open padding-small"></i>
-                            blog
-                            <span class="badge pull-right categorybadge">2</span>
-                        </a>
-                    </li>
-                </ul></li>
                 
             </ul>
         </div>
@@ -153,11 +150,14 @@
     <div class="publish-info-block">
         <small>
             <span class="published">
-                <i class="fa fa-calendar padding-small"></i><time datetime="2024-05-09T21:34:43.997881+02:00"> do 09 mei 2024</time>
+                <i class="fa fa-calendar padding-small"></i><time datetime="2024-04-27T14:59:00+02:00"> za 27 april 2024</time>
             </span>
             <span class="category">
                 <i class="fa fa-folder-open padding-small"></i><a href="/category/blog.html">blog</a>
             </span>
+            <span class="tags">
+                <i class="fa fa-tags padding-small"></i>
+                <a href="/tag/flakes.html">flakes</a> /                 <a href="/tag/blog.html">blog</a> /                 <a href="/tag/pelican.html">pelican</a> /                 <a href="/tag/devshell.html">devShell</a> /                 <a href="/tag/orgmode.html">orgMode</a> /                 <a href="/tag/github.html">gitHub</a>            </span>
         </small>
     </div>
 </div><!-- /.post-info -->                        </small>
@@ -170,59 +170,54 @@
                 <div class="entry-content">
                     
 <div id="content" class="content">
-<h1 class="title">Pelican blogging with Org mode</h1>
 
-<div id="outline-container-orgb41e4cb" class="outline-2">
-<h2 id="orgb41e4cb">Setting up this blog</h2>
-<div class="outline-text-2" id="text-orgb41e4cb">
-</div>
-<div id="outline-container-orge575d06" class="outline-3">
-<h3 id="orge575d06">GitHub pages</h3>
-<div class="outline-text-3" id="text-orge575d06">
+<div id="outline-container-orgdb95524" class="outline-3">
+<h3 id="orgdb95524">GitHub pages</h3>
+<div class="outline-text-3" id="text-orgdb95524">
 <p>
 GitHub will host your static web pages for you even on a free account making it rather ideal for a blog hosting platform.
 </p>
 </div>
 </div>
-<div id="outline-container-org5eb4463" class="outline-3">
-<h3 id="org5eb4463">Pelican</h3>
-<div class="outline-text-3" id="text-org5eb4463">
+<div id="outline-container-org45c69e1" class="outline-3">
+<h3 id="org45c69e1">Pelican</h3>
+<div class="outline-text-3" id="text-org45c69e1">
 <p>
 But before setting anything up in GitHub you should decide on your tooling. There are several site generators freely available with <a href="https://jekyllrb.com/">Jenkyll</a> probably being the most popular. I initially was going to use <a href="https://jekyllrb.com/">Jenkyll</a> but after noticing it's license I decided to look for alternatives. <a href="https://www.sitepoint.com/6-static-blog-generators-arent-jekyll/">Using this article</a> I found Pelican which is licensed with AGPL which I feel offers more protection from open source exploitation. 
 </p>
 </div>
 </div>
-<div id="outline-container-org113b3d4" class="outline-3">
-<h3 id="org113b3d4">Git started</h3>
-<div class="outline-text-3" id="text-org113b3d4">
+<div id="outline-container-org92f1f8b" class="outline-3">
+<h3 id="org92f1f8b">Git started</h3>
+<div class="outline-text-3" id="text-org92f1f8b">
 <p>
 With my tooling and hosting platform decided upon I followed this <a href="https://fedoramagazine.org/make-github-pages-blog-with-pelican/">Fedoria magazine article</a> to setup the basic Git structure. I use NixOs so not every applies to me but it was very helpful. They casually mention initializing your source repository with a readme but I found out the hard way that it's better to initialize it with a python .gitignore file.
 </p>
 </div>
 </div>
-<div id="outline-container-org6e79d8b" class="outline-3">
-<h3 id="org6e79d8b">Dev environment</h3>
-<div class="outline-text-3" id="text-org6e79d8b">
+<div id="outline-container-org0566b33" class="outline-3">
+<h3 id="org0566b33">Dev environment</h3>
+<div class="outline-text-3" id="text-org0566b33">
 <p>
 With a place to store and track my progress setup it was time to install the tools. I started with setting up a flake that I could use to version control the software used. It's not complicated if your accustomed to flakes.
 </p>
 <div class="org-src-container">
 <pre class="src src-nix">
-{
+<span style="color: #c792ea;">{</span>
   <span style="color: #ffcb6b;">description</span> = <span style="color: #c3e88d;">"blog"</span>;
   <span style="color: #ffcb6b;">inputs</span> =
-    {
+    <span style="color: #f78c6c;">{</span>
       <span style="color: #ffcb6b;">nixpkgs.url</span> = <span style="color: #c3e88d;">"github:nixos/nixpkgs/23.11"</span>;
-     };
-  <span style="color: #ffcb6b;">outputs</span> = { self, nixpkgs }:
+     <span style="color: #f78c6c;">}</span>;
+  <span style="color: #ffcb6b;">outputs</span> = <span style="color: #f78c6c;">{</span> self, nixpkgs <span style="color: #f78c6c;">}</span>:
     <span style="color: #89DDFF;">let</span>
       <span style="color: #ffcb6b;">system</span> = <span style="color: #c3e88d;">"x86_64-linux"</span>;
-      <span style="color: #ffcb6b;">pkgs</span> = nixpkgs.legacyPackages.${system};
+      <span style="color: #ffcb6b;">pkgs</span> = nixpkgs.legacyPackages.$<span style="color: #f78c6c;">{</span>system<span style="color: #f78c6c;">}</span>;
     <span style="color: #89DDFF;">in</span>
-    {
-      <span style="color: #ffcb6b;">devShells.x86_64-linux.default</span> = ( <span style="color: #82aaff;">import</span> <span style="color: #f78c6c;">./shell.nix</span> { <span style="color: #89DDFF;">inherit</span> pkgs; });
-    };
-}
+    <span style="color: #f78c6c;">{</span>
+      <span style="color: #ffcb6b;">devShells.x86_64-linux.default</span> = <span style="color: #c3e88d;">(</span> <span style="color: #82aaff;">import</span> <span style="color: #f78c6c;">./shell.nix</span> <span style="color: #89DDFF;">{</span> <span style="color: #89DDFF;">inherit</span> pkgs; <span style="color: #89DDFF;">}</span><span style="color: #c3e88d;">)</span>;
+    <span style="color: #f78c6c;">}</span>;
+<span style="color: #c792ea;">}</span>
 </pre>
 </div>
 <p>
@@ -230,19 +225,19 @@ Basically you specify your sources and where you want to use them and Nix takes 
 </p>
 <div class="org-src-container">
 <pre class="src src-nix">
-{ pkgs ? <span style="color: #82aaff;">import</span> <span style="color: #f78c6c;">&lt;nixpkgs&gt;</span> { } }:
+<span style="color: #c792ea;">{</span> pkgs ? <span style="color: #82aaff;">import</span> <span style="color: #f78c6c;">&lt;nixpkgs&gt;</span> <span style="color: #f78c6c;">{</span> <span style="color: #f78c6c;">}</span> <span style="color: #c792ea;">}</span>:
 pkgs.mkShell
-  {
-    <span style="color: #ffcb6b;">packages</span> = [
-      (pkgs.python3.withPackages (python-pkgs: [
+  <span style="color: #c792ea;">{</span>
+    <span style="color: #ffcb6b;">packages</span> = <span style="color: #f78c6c;">[</span>
+      <span style="color: #c3e88d;">(</span>pkgs.python3.withPackages <span style="color: #89DDFF;">(</span>python-pkgs: <span style="color: #bb80b3;">[</span>
         python-pkgs.pelican
         python-pkgs.ghp-import
-      ]))
+      <span style="color: #bb80b3;">]</span><span style="color: #89DDFF;">)</span><span style="color: #c3e88d;">)</span>
       pkgs.emacs
       pkgs.emacsPackages.htmlize
       pkgs.emacsPackages.nix-mode
-    ];
-  }
+    <span style="color: #f78c6c;">]</span>;
+  <span style="color: #c792ea;">}</span>
 </pre>
 </div>
 <p>
@@ -259,48 +254,48 @@ That will process the source files and serve the sight at <a href="http://127.0.
 </p>
 </div>
 </div>
-<div id="outline-container-orgf45db7b" class="outline-3">
-<h3 id="orgf45db7b">Org mode blogging with Pelican</h3>
-<div class="outline-text-3" id="text-orgf45db7b">
+<div id="outline-container-org964bddc" class="outline-3">
+<h3 id="org964bddc">Org mode blogging with Pelican</h3>
+<div class="outline-text-3" id="text-org964bddc">
 <p>
 Out of the box Pelican doesn't support org documents as source but there are three plugins you can use.
 </p>
 </div>
-<div id="outline-container-org5d93dc4" class="outline-4">
-<h4 id="org5d93dc4">org_pandoc_reader</h4>
-<div class="outline-text-4" id="text-org5d93dc4">
+<div id="outline-container-org33f0bff" class="outline-4">
+<h4 id="org33f0bff">org_pandoc_reader</h4>
+<div class="outline-text-4" id="text-org33f0bff">
 <p>
 It appears to be very simple to use but it sadly hasn't been maintained. Requiring a very old version of python that's no longer available in the Nix packages.
 </p>
 </div>
 </div>
-<div id="outline-container-org28a5cd0" class="outline-4">
-<h4 id="org28a5cd0">org_python_reader</h4>
-<div class="outline-text-4" id="text-org28a5cd0">
+<div id="outline-container-orgfbd1b72" class="outline-4">
+<h4 id="orgfbd1b72">org_python_reader</h4>
+<div class="outline-text-4" id="text-orgfbd1b72">
 <p>
 Is newer but sadly one of it's dependencies pyton-orgco isn't packaged by nix yet.
 </p>
 </div>
 </div>
-<div id="outline-container-orgfccd125" class="outline-4">
-<h4 id="orgfccd125">org_reader</h4>
-<div class="outline-text-4" id="text-orgfccd125">
+<div id="outline-container-orgcdb1302" class="outline-4">
+<h4 id="orgcdb1302">org_reader</h4>
+<div class="outline-text-4" id="text-orgcdb1302">
 <p>
 Is the most logical of the org plugins available requiring only emacs which you're probably using to author your org documents anyway. It needs to know the path to emacs which is complicated by running nix shell on NixOS.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org06ffee4" class="outline-3">
-<h3 id="org06ffee4">Installing and configuring org_reader</h3>
-<div class="outline-text-3" id="text-org06ffee4">
+<div id="outline-container-org2f2ba09" class="outline-3">
+<h3 id="org2f2ba09">Installing and configuring org_reader</h3>
+<div class="outline-text-3" id="text-org2f2ba09">
 <p>
 I chose to add the pelican plugins repo as a git submodule to keep everything contained and make my paths simple. It's may not be the best solution but since I already have a submodule for the output why not add more? Per the plugins documentation I only needed to tell Pelican where to find the plugins and define what to use.
 </p>
 <div class="org-src-container">
 <pre class="src src-python">
-<span style="color: #ffcb6b;">PLUGIN_PATHS</span> = [<span style="color: #c3e88d;">'./pelican-plugins'</span>]
-<span style="color: #ffcb6b;">PLUGINS</span> = [<span style="color: #c3e88d;">'org_reader'</span>]
+<span style="color: #ffcb6b;">PLUGIN_PATHS</span> = <span style="color: #c792ea;">[</span><span style="color: #c3e88d;">'./pelican-plugins'</span><span style="color: #c792ea;">]</span>
+<span style="color: #ffcb6b;">PLUGINS</span> = <span style="color: #c792ea;">[</span><span style="color: #c3e88d;">'org_reader'</span><span style="color: #c792ea;">]</span>
 </pre>
 </div>
 <p>
@@ -308,46 +303,39 @@ Telling org_reader where to find emacs in a nix shell dev environment was a bit 
 </p>
 <div class="org-src-container">
 <pre class="src src-nix">
-  { pkgs ? <span style="color: #82aaff;">import</span> <span style="color: #f78c6c;">&lt;nixpkgs&gt;</span> { } }:
+  <span style="color: #c792ea;">{</span> pkgs ? <span style="color: #82aaff;">import</span> <span style="color: #f78c6c;">&lt;nixpkgs&gt;</span> <span style="color: #f78c6c;">{</span> <span style="color: #f78c6c;">}</span> <span style="color: #c792ea;">}</span>:
 pkgs.mkShell
-  {
-    <span style="color: #ffcb6b;">packages</span> = [
-      (pkgs.python3.withPackages (python-pkgs: [
+  <span style="color: #c792ea;">{</span>
+    <span style="color: #ffcb6b;">packages</span> = <span style="color: #f78c6c;">[</span>
+      <span style="color: #c3e88d;">(</span>pkgs.python3.withPackages <span style="color: #89DDFF;">(</span>python-pkgs: <span style="color: #bb80b3;">[</span>
         python-pkgs.pelican
         python-pkgs.ghp-import
-      ]))
+      <span style="color: #bb80b3;">]</span><span style="color: #89DDFF;">)</span><span style="color: #c3e88d;">)</span>
       pkgs.emacs
       pkgs.emacsPackages.htmlize
       pkgs.emacsPackages.nix-mode
-    ];
+    <span style="color: #f78c6c;">]</span>;
     <span style="color: #676E95;"># shellHook = ''</span>
     <span style="color: #676E95;">#   echo ORG_READER_EMACS_LOCATION = \'${pkgs.emacs}/bin/emacs\' &gt;&gt; ./pelicanconf.py</span>
     <span style="color: #676E95;"># '';</span>
-  }
+  <span style="color: #c792ea;">}</span>
 </pre>
 </div>
 </div>
 </div>
-</div>
-<div id="outline-container-org2423c1b" class="outline-2">
-<h2 id="org2423c1b">Final thoughts</h2>
-<div class="outline-text-2" id="text-org2423c1b">
+<div id="outline-container-org5ee1a67" class="outline-2">
+<h2 id="org5ee1a67">Final thoughts</h2>
+<div class="outline-text-2" id="text-org5ee1a67">
 <p>
 There's work still to be done with the syntax highlighting some formatting I'd like to improve but that can be tomorrows problem.
 </p>
 </div>
 </div>
 </div>
-<div id="postamble" class="status">
-<p class="date">Date: 2024-04-27 14:59</p>
-<p class="author">Author: public</p>
-<p class="date">Created: 2024-05-09 do 21:34</p>
-<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
-</div>
 
                 </div>
                 <footer class="text-right">
-                    <p>- public</p>
+                    <p>- SpeDAllen</p>
                 </footer>
             </div>
         </div>

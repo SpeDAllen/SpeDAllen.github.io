@@ -1,466 +1,184 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>"My new blog" - emacs</title>
-        <meta charset="utf-8" />
-        <link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
-        <link href="/" type="application/atom+xml" rel="alternate" title=""My new blog" ATOM Feed" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="keywords" content="emacs" />
 
+<!-- Open Graph tags -->
+<meta property="og:site_name" content=""My new blog""/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" content=""My new blog""/>
+    <meta property="og:url" content=""/>
+    <meta property="og:description" content=""My new blog""/>
 
-        <!--[if IE]>
-                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <title>emacs - "My new blog"</title>
 
-        <!--[if lte IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="/css/ie.css"/>
-                <script src="/js/IE8.js" type="text/javascript"></script><![endif]-->
+        <link rel="stylesheet" href="/theme/css/bootstrap.lumen.min.css" type="text/css"/>
 
-        <!--[if lt IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="/css/ie6.css"/><![endif]-->
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/theme/css/pygments/native.css" rel="stylesheet" />
+    
+    <link href="/theme/css/pelican-twitchy.min.css" rel="stylesheet" />
 
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <!-- Feeds -->
 </head>
-
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/index.html">"My new blog"  <strong>Explore, learn, code, contribue, improve</strong></a></h1>
-                <nav><ul>
-                <li><a href="/">Archives</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
-
-     <section id="content" class="body">
-        <aside id="featured"><article>
-                <h1 class="entry-title"><a href="/2024/create-a-useful-dev-shell.html">Create a useful development shell</a></h1>
-<footer class="post-info">
-        <abbr class="published" title="2024-05-05T00:00:00+02:00">
-                zo 05 mei 2024
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="/author/spedallen.html">SpeDAllen</a>
-        </address>
-<p>In <a href="/category/blog.html">blog</a>. </p>
-<p>tags: <a href="/tag/flakes.html">flakes</a><a href="/tag/blog.html">blog</a><a href="/tag/pelican.html">pelican</a><a href="/tag/devshell.html">devShell</a><a href="/tag/orgmode.html">orgMode</a><a href="/tag/emacs.html">emacs</a></p></p></footer><!-- /.post-info --><!-- /.post-info -->
+<body data-spy="scroll" data-target="#scrollspy">
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper-small" class="twitchy-background">
+            <ul id="accordion-small" class="sidebar-nav sidebar-nav-small">
+                <li>
+        <a href="" title=""My new blog"" class="collapsed">
+            <span class="glyphicon glyphicon-home"></span>
+        </a>
+    </li>
+                <li class="nav-divider"></li>
+                <li>
+        <a href="/archives.html" title="Recent Articles" class="collapsed">
+            <span class="glyphicon glyphicon-th-list"></span>
+        </a>
+    </li>
                 
-<div id="outline-container-org0b0d10b" class="outline-2">
-<h2 id="org0b0d10b">Creating a useful dev shell for blogging</h2>
-<div class="outline-text-2" id="text-org0b0d10b">
-<p>
-In my previous post the shell.nix file was rather sparse. I was using it mostly to setup and use Pelican but dev shells in NixOs are far more useful then just providing build tools. They can provide your entire IDE as well. That's what I set out to do this weekend and I feel I've had some success so here's a post to share my experience.
-</p>
-</div>
-<div id="outline-container-org9f4881d" class="outline-3">
-<h3 id="org9f4881d">False starts and missteps</h3>
-<div class="outline-text-3" id="text-org9f4881d">
-<p>
-It feels like I can't do a lot of new things these days without first running face first into some brick walls. The first problem I ran into trying to use Emacs in the dev shell was Emacs by default will use the users Emacs init file. For some people this won't be a problem but my system Emacs version is different then the one in the dev shell so the init file was not compatible. I remembered the NixOs wiki went into detail on how to incorporate your lisp into your nix configuration so that's where I started. The NixOs wiki <a href="https://nixos.wiki/wiki/Emacs">article</a> on Emacs is heavily reliant on the community overlay which I had never used. The article describes it's usage in a flake but in a dev shell. Trying to marry the two proved frustrating and ultimately unnecessary. I eventually realized that you can just supply a custom init file and make your dev shell load Emacs using that init file. The next wall I ran into came when trying to automate the addition of the header text that Pelican uses to supply metadata for the blog but more on that later.
-</p>
-</div>
-</div>
-<div id="outline-container-orgdd46ef3" class="outline-3">
-<h3 id="orgdd46ef3">Dev shell auto start</h3>
-<div class="outline-text-3" id="text-orgdd46ef3">
-<p>
-I used the dev shells shell hook function to start it's copy of Emacs and load my custom init file with <code>emacs -q -l ./.emacs &amp;</code> since I named my init file <code>.emacs</code> and it's in the current directory when I run <code>nix develop</code>. In my previous post I discussed the usefulness of <code>make devserver</code> and I wanted it to auto start for me when I start blogging so I included a line to do that as well. Since I'm writing a custom init file for this shell I don't want Pelican to be reliant on a users init file so I found a variable you can set in the pelicanconf.py file which tells Pelican which init file to use with Emacs. This is another one time setting so after using it in the nix development environment I commented it out of the shell.nix file. Here's the resulting shell hook.
-</p>
-<div class="org-src-container">
-<pre class="src src-nix">
-<span style="font-weight: bold; font-style: italic;">shellHook</span> = <span style="font-style: italic;">''</span>
-<span style="font-style: italic;">  # echo ORG_READER_EMACS_LOCATION = \'</span><span style="font-weight: bold;">${</span>pkgs.emacs29-pgtk<span style="font-weight: bold;">}</span><span style="font-style: italic;">/bin/emacs\' &gt;&gt; ./pelicanconf.py</span>
-<span style="font-style: italic;">  # echo ORG_READER_EMACS_SETTINGS = \'./.emacs\' &gt;&gt; ./pelicanconf.py</span>
-<span style="font-style: italic;">  emacs -q -l ./.emacs &amp;</span>
-<span style="font-style: italic;">  make devserver</span>
-<span style="font-style: italic;">''</span>;
-</pre>
-</div>
-</div>
-</div>
-</div>
-<div id="outline-container-orgdf620b8" class="outline-2">
-<h2 id="orgdf620b8">Extra Emacs packages for a custom environment</h2>
-<div class="outline-text-2" id="text-orgdf620b8">
-<p>
-By default Emacs looks a bit dated it also presents terribly in a Wayland compositor but with a little effort it cleans up nicely. One of the new features in Emacs is the ability to compile it as a pure GTK application. GTK applications work a lot better on Wayland and thankfully we don't need to compile it ourselves as it's available in the Nix store. Just like we did with the Python packages we can have our Nix shell use a string list to install our Emacs packages in our dev shell for us. I use a few of them here and will cover what they do later in the article.
-</p>
-<div class="org-src-container">
-<pre class="src src-nix">
-  ((emacsPackagesFor pkgs.emacs29-pgtk).emacsWithPackages (
-  epkgs: [
-    epkgs.htmlize
-    epkgs.nix-mode
-    epkgs.use-package
-    epkgs.nerd-icons
-    epkgs.evil-nerd-commenter
-    epkgs.doom-modeline
-    epkgs.all-the-icons
-    epkgs.doom-themes
-    epkgs.rainbow-delimiters
-    epkgs.org
-    epkgs.org-bullets
-    epkgs.visual-fill-column
-    epkgs.string-inflection
-  ]
-))
-</pre>
-</div>
-<p>
-We'll also need a few fonts and can't forget our spelling dictionary.
-</p>
-<div class="org-src-container">
-<pre class="src src-nix">
-emacs-all-the-icons-fonts
-dejavu_fonts
-hunspell
-hunspellDicts.en_US-large
-</pre>
-</div>
-<p>
-Pulling it all together for a complete set of packages makes our shell rather full. Though it could always be worse.
-</p>
-<div class="org-src-container">
-<pre class="src src-nix">
-<span style="font-weight: bold; font-style: italic;">packages</span> = <span style="font-weight: bold;">with</span> pkgs; [
-  (python3.withPackages (python-pkgs: [
-    python-pkgs.pelican
-    python-pkgs.ghp-import
-  ]))
-  ((emacsPackagesFor pkgs.emacs29-pgtk).emacsWithPackages (
-    epkgs: [
-      epkgs.htmlize
-      epkgs.nix-mode
-      epkgs.use-package
-      epkgs.nerd-icons
-      epkgs.evil-nerd-commenter
-      epkgs.doom-modeline
-      epkgs.all-the-icons
-      epkgs.doom-themes
-      epkgs.rainbow-delimiters
-      epkgs.org
-      epkgs.org-bullets
-      epkgs.visual-fill-column
-      epkgs.string-inflection
-    ]
-  ))
-  emacs-all-the-icons-fonts
-  dejavu_fonts
-  hunspell
-  hunspellDicts.en_US-large
-];
-</pre>
-</div>
-</div>
-</div>
-<div id="outline-container-orge8b6457" class="outline-2">
-<h2 id="orge8b6457">A custom Emacs init for a comfortable experience</h2>
-<div class="outline-text-2" id="text-orge8b6457">
-<p>
-Most of the init file I use here was either inspired by or downright stolen from <a href="https://github.com/daviwil">David Wilson</a> following his Emacs from scratch YouTube series on his <a href="https://www.youtube.com/@SystemCrafters">System Crafters</a> channel. He does a much better job of explaining everything then I ever could so I'll just cover the highlights here. If you're interested in learning how to configure and use Emacs I can't recommend his YouTube series enough.
-</p>
-</div>
-<div id="outline-container-orged635d6" class="outline-3">
-<h3 id="orged635d6">Stripping out the old Emacs UI elements</h3>
-<div class="outline-text-3" id="text-orged635d6">
-<p>
-Here I disable the title bar, button menu, and welcome page. And start setting up some basic fonts while enabling background opacity.
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">
-(<span style="font-weight: bold;">setq</span> inhibit-startup-message t)
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
-(tooltip-mode -1)
-(set-fringe-mode 10)
-(menu-bar-mode -1)
-(<span style="font-weight: bold;">setq</span> visible-bell t)
-(<span style="font-weight: bold;">setq</span> select-enable-clipboard t)
-(mouse-avoidance-mode 'exile)
-(<span style="font-weight: bold;">setq</span> frame-title-format <span style="font-style: italic;">"Emacs"</span>)
-(<span style="font-weight: bold;">setq</span> warning-minimum-level <span style="font-weight: bold;">:emergency</span>)
-(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">sda/set-font-face</span> ()
-  (set-face-attribute 'default nil <span style="font-weight: bold;">:font</span> <span style="font-style: italic;">"DejaVuSansM Nerd Font 10"</span>)
-  (add-to-list 'default-frame-alist '(alpha-background . 90)))
+                <li class="nav-divider"></li>
+                <li>
+        <a href="#" title="Back to top" class="collapsed">
+            <span class="fa fa-arrow-up"></span>
+        </a>
+    </li>
+            </ul>
+        </div>
+        <div id="sidebar-wrapper" class="twitchy-background">
+            <ul id="accordion" class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="/">
+                            <span class="glyphicon glyphicon-home padding-small"></span>
+                            "My new blog"
+                    </a>
+                </li>
+                    <li class="nav-divider"></li>
+                    <li>
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse-latest">
+                            <span class="glyphicon glyphicon-th-list padding-small"></span>
+                            Recent Articles
+                        </a>
+                    </li>
+                    <li class="panel anti-panel"><ul id="collapse-latest" class="sidebar_submenu collapse ">
+                        <li class="">
+                            <a class="hide-overflow" href="/2024/theming-the-blog.html" title="Theming the blog">
+                                <i class="fa fa-file-text padding-small"></i>
+                                Theming the blog
+                            </a>
+                        </li>
+                        <li class="">
+                            <a class="hide-overflow" href="/2024/create-a-useful-development-shell.html" title="Create a useful development shell">
+                                <i class="fa fa-file-text padding-small"></i>
+                                Create a useful development shell
+                            </a>
+                        </li>
+                        <li class="">
+                            <a class="hide-overflow" href="/2024/pelican-blogging-with-org-mode.html" title="Pelican blogging with Org mode">
+                                <i class="fa fa-file-text padding-small"></i>
+                                Pelican blogging with Org mode
+                            </a>
+                        </li>
+                    <li>
+                        <a href="/archives.html">
+                            <i class="fa fa-arrow-right padding-small"></i>
+                            More
+                        </a>
+                    </li>
+                    </ul></li>
+                
+                <li class="nav-divider"></li>
+                <li>
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse-pages">
+                        <i class="fa fa-folder-open padding-small"></i>
+                        Pages
+                    </a>
+                </li>
+                <li class="panel anti-panel"><ul id="collapse-pages" class="sidebar_submenu collapse ">
+                </ul></li>
+                
+                
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+        <!-- open/close sidebar -->
+        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">
+            <span id="right-arrow" class="glyphicon glyphicon-chevron-right"  title="expand sidebar"></span>
+            <span id="left-arrow" class="glyphicon glyphicon-chevron-left" title="minimize sidebar"></span>
+        </a>
+       <!-- /open/close sidebar -->
 
-(<span style="font-weight: bold;">if</span> (daemonp)
-    (add-hook 'after-make-frame-functions
-              (<span style="font-weight: bold;">lambda</span> (frame)
-                (<span style="font-weight: bold;">with-selected-frame</span> frame
-                  (sda/set-font-face)))))
-(sda/set-font-face)
-</pre>
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+<div class="row">
+    <div class="col-lg-9">
+        <header class="page-header">
+            <h1>Articles featuring emacs</h1>
+        </header>
+    </div>
 </div>
+<div class="row">
+    <div class="col-lg-9">
+            <article>
+                <h4>
+                    <time datetime="2024-05-05T00:00:00+02:00"> zo 05 mei 2024</time>
+                    <a href="/2024/create-a-useful-development-shell.html">Create a useful development shell</a>
+                </h4>
+            </article>
+    </div>
 </div>
-</div>
-<div id="outline-container-org5583a7c" class="outline-3">
-<h3 id="org5583a7c">Getting started with packages</h3>
-<div class="outline-text-3" id="text-org5583a7c">
-<p>
-Next I ensure access to the package archives and setup use-package.
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">
-(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">package</span>)
-(<span style="font-weight: bold;">setq</span> package-archives '((<span style="font-style: italic;">"melpa"</span> . <span style="font-style: italic;">"https://melpa.org/packages/"</span>)
-                         (<span style="font-style: italic;">"org"</span> . <span style="font-style: italic;">"https://orgmode.org/elpa/"</span>)
-                         (<span style="font-style: italic;">"gnu"</span> . <span style="font-style: italic;">"https://elpa.gnu.org/packages/"</span>)
-                         (<span style="font-style: italic;">"nongnu"</span> . <span style="font-style: italic;">"https://elpa.nongnu.org/nongnu/"</span>)))
-(package-initialize)
-(<span style="font-weight: bold;">unless</span> package-archive-contents
-  (package-refresh-contents))
-(<span style="font-weight: bold;">unless</span> (package-installed-p 'use-package)
-  (package-install 'use-package))
-(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">use-package</span>)
-(<span style="font-weight: bold;">setq</span> use-package-always-ensure t)
-(<span style="font-weight: bold;">setq</span> use-package-verbose t)
-</pre>
-</div>
-</div>
-</div>
-<div id="outline-container-org5480f4d" class="outline-3">
-<h3 id="org5480f4d">Emacs look and feel</h3>
-<div class="outline-text-3" id="text-org5480f4d">
-<p>
-In the next section I setup a lot of the look and feel of Emacs in general as well as adding some nice quality of life keybindings.
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">
-(<span style="font-weight: bold;">use-package</span> <span style="font-weight: bold; text-decoration: underline;">nerd-icons</span>
-  <span style="font-weight: bold;">:custom</span>
-  (nerd-icon-font-family <span style="font-style: italic;">"DejaVuSansM Nerd Font"</span>))
+<footer>
+    <hr>
+    <div class="row">
+        <div class="col-lg-9 text-center">
+            <p><small>
+                Built by <a href="http://docs.getpelican.com/en/latest">Pelican</a> / <a href="https://github.com/ingwinlu/pelican-twitchy">pelican-twitchy</a>
+                &middot;                    &copy; 2024 SpeDAllen
+            </small></p>
+        </div>
+    </div>
+</footer>            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery Version 1.11.2 -->
+    <script src="/theme/js/jquery-1.11.2.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/theme/js/bootstrap.min.js"></script>
+    <!-- twitchy Script -->
+    <script src="/theme/js/pelican_twitchy.min.js"></script>
+<script>
+    function FadeInOnScroll(ObjectList){
+        ObjectList.each(function(i) {
+            var bottom_of_object = $(this).position().top + $(this).outerHeight();
+            var bottom_of_window = $(window).scrollTop() + $(window).height();
 
-(<span style="font-weight: bold;">use-package</span> <span style="font-weight: bold; text-decoration: underline;">evil-nerd-commenter</span>
-  <span style="font-weight: bold;">:bind</span> (<span style="font-style: italic;">"M-/"</span> . evilnc-comment-or-uncomment-lines))
+            if( bottom_of_window > bottom_of_object ){
+                $(this).fadeTo(750,1);
+            }
+        });
+    }
 
-(<span style="font-weight: bold;">use-package</span> <span style="font-weight: bold; text-decoration: underline;">doom-modeline</span>
-  <span style="font-weight: bold;">:init</span> (doom-modeline-mode t)
-  <span style="font-weight: bold;">:custom</span> ((doom-modeline-height 4)))
+    articles = $("article").fadeTo(0, 0.05);
+    FadeInOnScroll(articles)
 
-(<span style="font-weight: bold;">use-package</span> <span style="font-weight: bold; text-decoration: underline;">all-the-icons</span>)
-
-(<span style="font-weight: bold;">use-package</span> <span style="font-weight: bold; text-decoration: underline;">doom-themes</span>
-  <span style="font-weight: bold;">:init</span> (load-theme 'doom-palenight t))
-
-(column-number-mode)
-(global-display-line-numbers-mode t)
-(<span style="font-weight: bold;">dolist</span> (mode '(org-mode-hook
-                term-mode-hook
-                eshell-mode-hook
-                shell-mode-hook))
-  (add-hook mode (<span style="font-weight: bold;">lambda</span> () (display-line-numbers-mode 0))))
-</pre>
-</div>
-</div>
-</div>
-<div id="outline-container-org61b969a" class="outline-3">
-<h3 id="org61b969a">Configuring Org mode</h3>
-<div class="outline-text-3" id="text-org61b969a">
-<p>
-This section is rather extensive. The majority of what I plan to do with this environment is write blog posts in org mode so getting Org mode into a comfortable state is worth the extra effort.
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">
-(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">sda/org-font-setup</span> ()
-  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Replace list hyphen with dot</span>
-  (font-lock-add-keywords 'org-mode
-                          '((<span style="font-style: italic;">"^ *</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(</span><span style="font-style: italic;">[-]</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;"> "</span>
-                             (0 (<span style="font-weight: bold;">prog1</span> () (compose-region (match-beginning 1) (match-end 1) <span style="font-style: italic;">"&#8226;"</span>))))))
-  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Disable org indent</span>
-  (<span style="font-weight: bold;">setq</span> org-adapt-indentation nil)
-
-  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Set faces for heading levels</span>
-  (<span style="font-weight: bold;">dolist</span> (face '((org-level-1 . 1.2)
-                  (org-level-2 . 1.1)
-                  (org-level-3 . 1.05)
-                  (org-level-4 . 1.0)
-                  (org-level-5 . 1.1)
-                  (org-level-6 . 1.1)
-                  (org-level-7 . 1.1)
-                  (org-level-8 . 1.1)))
-    (set-face-attribute (car face) nil <span style="font-weight: bold;">:font</span> <span style="font-style: italic;">"DejaVu Sans Mono"</span> <span style="font-weight: bold;">:weight</span> 'regular <span style="font-weight: bold;">:height</span> (cdr face)))
-
-  <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Ensure that anything that should be fixed-pitch in Org files appears that way</span>
-  (set-face-attribute 'org-block nil    <span style="font-weight: bold;">:foreground</span> nil <span style="font-weight: bold;">:inherit</span> 'fixed-pitch)
-  (set-face-attribute 'org-table nil    <span style="font-weight: bold;">:inherit</span> 'fixed-pitch)
-  (set-face-attribute 'org-formula nil  <span style="font-weight: bold;">:inherit</span> 'fixed-pitch)
-  (set-face-attribute 'org-code nil     <span style="font-weight: bold;">:inherit</span> '(shadow fixed-pitch))
-  (set-face-attribute 'org-table nil    <span style="font-weight: bold;">:inherit</span> '(shadow fixed-pitch))
-  (set-face-attribute 'org-verbatim nil <span style="font-weight: bold;">:inherit</span> '(shadow fixed-pitch))
-  (set-face-attribute 'org-special-keyword nil <span style="font-weight: bold;">:inherit</span> '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-meta-line nil <span style="font-weight: bold;">:inherit</span> '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-checkbox nil  <span style="font-weight: bold;">:inherit</span> 'fixed-pitch)
-  (set-face-attribute 'line-number nil <span style="font-weight: bold;">:inherit</span> 'fixed-pitch)
-  (set-face-attribute 'line-number-current-line nil <span style="font-weight: bold;">:inherit</span> 'fixed-pitch))
-
-(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">sda/org-mode-setup</span> ()
-  (org-indent-mode)
-  (turn-on-font-lock)
-  (variable-pitch-mode 1)
-  (visual-line-mode 1)
-  (<span style="font-weight: bold;">setq</span> evil-auto-indent nil)
-  (<span style="font-weight: bold;">setq</span> org-link-elisp-confirm-function nil)
-  (<span style="font-weight: bold;">setq</span> org-export-backends
-        '(ascii html icalendar latex md odt))
-  (<span style="font-weight: bold;">setq</span> org-todo-keywords
-        '((sequence <span style="font-style: italic;">"TODO"</span> <span style="font-style: italic;">"In Process"</span> <span style="font-style: italic;">"|"</span> <span style="font-style: italic;">"Done"</span> <span style="font-style: italic;">"Abandoned"</span>))))
-
-(<span style="font-weight: bold;">use-package</span> <span style="font-weight: bold; text-decoration: underline;">org</span>
-  <span style="font-weight: bold;">:hook</span> (org-mode . sda/org-mode-setup)
-  <span style="font-weight: bold;">:config</span>
-  (sda/org-font-setup))
-
-(<span style="font-weight: bold;">use-package</span> <span style="font-weight: bold; text-decoration: underline;">org-bullets</span>
-  <span style="font-weight: bold;">:hook</span> (org-mode . org-bullets-mode)
-  <span style="font-weight: bold;">:custom</span>
-  (org-bullets-bullet-list '(<span style="font-style: italic;">"&#9673;"</span> <span style="font-style: italic;">"&#9675;"</span> <span style="font-style: italic;">"&#9679;"</span> <span style="font-style: italic;">"&#9675;"</span> <span style="font-style: italic;">"&#9679;"</span> <span style="font-style: italic;">"&#9675;"</span> <span style="font-style: italic;">"&#9679;"</span>)))
-
-(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">sda/org-mode-visual-fill</span>()
-  (<span style="font-weight: bold;">setq</span> visual-fill-column-width 150
-        visual-fill-column-center-text t)
-  (visual-fill-column-mode 1))
-
-(<span style="font-weight: bold;">use-package</span> <span style="font-weight: bold; text-decoration: underline;">visual-fill-column</span>
-  <span style="font-weight: bold;">:hook</span> (org-mode . sda/org-mode-visual-fill))
-
-(<span style="font-weight: bold;">with-eval-after-load</span> 'org
-  (org-babel-do-load-languages
-   'org-bable-load-languages
-   '((emacs-lisp . t)))
-  (<span style="font-weight: bold;">setq</span> org-confirm-babel-evaluate nil))
-
-(<span style="font-weight: bold;">with-eval-after-load</span> 'org
-  (<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">org-tempo</span>)
-  (add-to-list 'org-structure-template-alist '(<span style="font-style: italic;">"sh"</span> . <span style="font-style: italic;">"src shell"</span>))
-  (add-to-list 'org-structure-template-alist '(<span style="font-style: italic;">"el"</span> . <span style="font-style: italic;">"src emacs-lisp"</span>))
-  (add-to-list 'org-structure-template-alist '(<span style="font-style: italic;">"ht"</span> . <span style="font-style: italic;">"src html"</span>))
-  (add-to-list 'org-structure-template-alist '(<span style="font-style: italic;">"md"</span> . <span style="font-style: italic;">"src markdown"</span>))
-  (add-to-list 'org-structure-template-alist '(<span style="font-style: italic;">"nx"</span> . <span style="font-style: italic;">"src nix"</span>))
-  (add-to-list 'org-structure-template-alist '(<span style="font-style: italic;">"pw"</span> . <span style="font-style: italic;">"src powershell"</span>)))
-</pre>
-</div>
-</div>
-</div>
-<div id="outline-container-org71f554d" class="outline-3">
-<h3 id="org71f554d">Spell checking</h3>
-<div class="outline-text-3" id="text-org71f554d">
-<p>
-Since these blog posts will available publicly having a good spell checker is crucial.
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">
-(<span style="font-weight: bold;">setq</span> ispell-program-name <span style="font-style: italic;">"hunspell"</span>)
-
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">"en_US" is key to lookup in `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">ispell-local-dictionary-alist</span><span style="font-weight: bold; font-style: italic;">'.</span>
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Please note it will be passed as default value to hunspell CLI `-d` option</span>
-<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">if you don't manually setup `-d` in `ispell-local-dictionary-alist`</span>
-(<span style="font-weight: bold;">setq</span> ispell-local-dictionary <span style="font-style: italic;">"en_US"</span>)
-
-(<span style="font-weight: bold;">setq</span> ispell-local-dictionary-alist
-      '((<span style="font-style: italic;">"en_US"</span> <span style="font-style: italic;">"[[:alpha:]]"</span> <span style="font-style: italic;">"[</span><span style="font-style: italic;">^</span><span style="font-style: italic;">[:alpha:]]"</span> <span style="font-style: italic;">"[']"</span> nil (<span style="font-style: italic;">"-d"</span> <span style="font-style: italic;">"en_US"</span>) nil utf-8)))
-
-(autoload 'flyspell-mode <span style="font-style: italic;">"flyspell"</span> <span style="font-style: italic;">"On-the-fly spelling checker."</span> t)
-(add-hook 'message-mode-hook 'turn-on-flyspell)
-(add-hook 'text-mode-hook 'turn-on-flyspell)
-(add-hook 'org-mode-hook 'flyspell-prog-mode)
-(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">turn-on-flyspell</span> ()
-  <span style="font-style: italic;">"Force flyspell-mode on using a positive arg.  For use in hooks."</span>
-  (<span style="font-weight: bold;">interactive</span>)
-  (flyspell-mode 1))
-
-(eval-after-load <span style="font-style: italic;">"flyspell"</span>
-  '(progn
-     (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word)
-     (define-key flyspell-mouse-map [mouse-3] #'undefined)))
-</pre>
-</div>
-<p>
-NixOs isn't like most other systems it doesn't like to let software packages access other software packages outside of dbus. So I have to tell hunspell where to find it's dictionaries. Thankfully this is accomplished with just a simple environment variable added to the shell.nix file
-</p>
-<div class="org-src-container">
-<pre class="src src-nix">
-<span style="font-weight: bold; font-style: italic;">DICPATH</span> = <span style="font-style: italic;">"</span><span style="font-weight: bold;">${</span>pkgs.hunspellDicts.en_US-large<span style="font-weight: bold;">}</span><span style="font-style: italic;">/share/hunspell/"</span>;
-</pre>
-</div>
-</div>
-</div>
-<div id="outline-container-org73200d4" class="outline-3">
-<h3 id="org73200d4">Extra functionality</h3>
-<div class="outline-text-3" id="text-org73200d4">
-<p>
-Here we enable some packages. I don't need them customized or do any modifications here it's just extra functionally that I need here and I need it working
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">
-(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">htmlize</span>)
-(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">nix-mode</span>)
-(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">string-inflection</span>)
-</pre>
-</div>
-</div>
-</div>
-<div id="outline-container-org54534e0" class="outline-3">
-<h3 id="org54534e0">Custom functions</h3>
-<div class="outline-text-3" id="text-org54534e0">
-<p>
-Until this point everything I've included in this new special dev shell init file has been a direct copy paste from my system init file. So why do this? Why not just use you system init file and call it a day? Two reasons: 1 Including it here that means no matter what as long as I have access to this Git repository and it's sub-modules I have my development environment ready go. It'll be exactly the way I left it. If for some reason I don't blog for three months or three years and a new version of Emacs is released my entire system configuration changes I don't have to retrain Emacs how to do what it's doing today. 2 Custom functions for this environment. You see I've been using Emacs for 30 some odd years now. My system configuration is so cluttered with functions I don't remember what half of them do any more. Having the custom functions here for this bespoke purpose means they're not in my system configuration where I may never find them again. Or make four of them because I keep forgetting that I already did it.
-</p>
-</div>
-<div id="outline-container-org20cdf5a" class="outline-4">
-<h4 id="org20cdf5a">Add Pelican header to a blog post</h4>
-<div class="outline-text-4" id="text-org20cdf5a">
-<p>
-This is another place I stumbled a bit. Pelican needs a header to perform it's metadata magic and I don't want to manually copy and paste that header each time I start a new post. I initially tried using auto-insert-mode for this but quickly found it was just appending the text and would do it each time I opened the file. It appears that the Emacs package header2 is how most people apply headers in Emacs these days but that package isn't available in the Nix store. I also want my file names to be taken from the blog title and saved in lower camel case. This particular kind of string manipulation is new to me in lisp so it took a bit of trial and error but we got there in the end
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">
-(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">sda/new-post</span> ()
-  (<span style="font-weight: bold;">interactive</span>)
-  (<span style="font-weight: bold;">setq</span> new-blog-post-title (read-from-minibuffer <span style="font-style: italic;">"Post name: "</span>))
-  (<span style="font-weight: bold;">setq</span> new-blog-post-tags (read-from-minibuffer <span style="font-style: italic;">"Tags: "</span>))
-  (<span style="font-weight: bold;">setq</span> new-blog-post-slug (downcase (replace-regexp-in-string <span style="font-style: italic;">"[</span><span style="font-style: italic;">^</span><span style="font-style: italic;">[:alpha:][:digit:]_-]"</span> <span style="font-style: italic;">""</span> (string-replace <span style="font-style: italic;">" "</span> <span style="font-style: italic;">"-"</span> new-blog-post-title))))
-  (<span style="font-weight: bold;">setq</span> new-blog-post-file (concat <span style="font-style: italic;">"./content/blog/"</span> (string-inflection-lower-camelcase-function (string-replace <span style="font-style: italic;">" "</span> <span style="font-style: italic;">"_"</span> new-blog-post-title)) <span style="font-style: italic;">".org"</span>))
-  (<span style="font-weight: bold;">let</span> ((org-capture-templates
-        `((<span style="font-style: italic;">"p"</span> <span style="font-style: italic;">"New Pelican blog post"</span> plain (file new-blog-post-file)
-           ,(concat <span style="font-style: italic;">"#+title: "</span> new-blog-post-title <span style="font-style: italic;">"\n#+DATE: "</span> (format-time-string <span style="font-style: italic;">"%Y-%m-%d"</span>) <span style="font-style: italic;">"\n#+AUTHOR: SpeDAllen\n#+PROPERTY: LANGUAGE en\n#+PROPERTY: SLUG "</span> new-blog-post-slug <span style="font-style: italic;">"\n#+PROPERTY: TAGS "</span> new-blog-post-tags <span style="font-style: italic;">"\n#+options: toc:nil num:nil ^:nil\n"</span>)))
-        )) <span style="font-weight: bold;">(org-capture)))</span>
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div id="outline-container-orga4c0a0e" class="outline-2">
-<h2 id="orga4c0a0e">Final thoughts</h2>
-<div class="outline-text-2" id="text-orga4c0a0e">
-<p>
-With the custom function I can get a new blog post started very quickly. My workflow consists of navigating to the Git repository, running <code>nix develop</code>, toggling my terminal scratchpad out of the way, and running <code>M-x sda/new-post</code> after following the on screen prompts my new Org file is created and I can start adding content. Next week I plan to shift my focus back to Pelican. It's time to clean the site up a bit. Add a welcome page, about me, 404, and so on. Perhaps I'll even do something about this theme.
-</p>
-</div>
-</div>
-
-        </article></aside><!-- /#featured -->
-</ol><!-- /#posts-list -->
-</section><!-- /#content -->
-
-        <aside id="sidebar">
-                <div class="widget">
-                        <h2>Categories</h2>
-                        <ul>
-                           <li ><a href="/category/blog.html">blog</a></li>
-                        </ul>
-                </div>
-                <div class="widget blogroll">
-                        <h2>Blogroll</h2>
-                        <ul>
-                            <li><a href="https://github.com/SpeDAllen">My GitHub</a></li>
-                        </ul>
-                </div><!-- /.blogroll -->
-        </aside><!-- /#sidebar -->
-
-        <footer id="footer" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">pelican</a>, which takes great advantages of <a href="http://python.org">python</a>.
-                </address><!-- /#about -->
-
-                <p>The theme is «notmyidea-cms», a modified version of «notmyidea», the default theme.</p>
-        </footer><!-- /#footer -->
-
+    $(window).scroll(function() {
+        FadeInOnScroll(articles)
+    });
+</script>
 </body>
 </html>
